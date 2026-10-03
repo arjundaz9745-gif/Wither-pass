@@ -515,31 +515,32 @@ async def continue_after_captcha(user_id, captcha_text, interaction):
                                                      desired_password)
 
         if not actual_password:
-    await channel.send(embed=create_embed(
-        "❌ Password Reset Failed",
-        "Could not change the password. Please try again.",
-        COLOR_ERROR))
-    await interaction.followup.send(embed=create_embed(
-        "❌ Failed", "Password reset failed.", COLOR_ERROR),
-                                    ephemeral=True)
+            await channel.send(embed=create_embed(
+                "❌ Password Reset Failed",
+                "Could not change the password. Please try again.",
+                COLOR_ERROR))
+            await interaction.followup.send(embed=create_embed(
+                "❌ Failed", "Password reset failed.", COLOR_ERROR),
+                                            ephemeral=True)
 
-    driver.quit()
-    if os.path.exists(session["captcha_file"]):
-        os.remove(session["captcha_file"])
-    del data_manager.processing_sessions[user_id]
-    data_manager.update_stats(user_id, False)
-    return
-try:
-    # previous code...
+            driver.quit()
+            if os.path.exists(session["captcha_file"]):
+                os.remove(session["captcha_file"])
+            del data_manager.processing_sessions[user_id]
+            data_manager.update_stats(user_id, False)
+            return
 
-    print("Operation completed successfully")
+        try:
+            # previous code...
 
-    # Success!
-    result = {
-        "status": "success",
-        "name": account_info.get("name"),
-        "region": account_info.get("region"),
-    }
+            print("Operation completed successfully")
 
-except Exception as e:
-    print(f"Error: {e}")
+            # Success!
+            result = {
+                "status": "success",
+                "name": account_info.get("name"),
+                "region": account_info.get("region"),
+            }
+
+        except Exception as e:
+            print(f"Error: {e}")
