@@ -36,7 +36,7 @@ from automation.acsr import submit_acsr_form
 from automation.acsr_continue import continue_acsr_flow
 from automation.reset_password import perform_password_reset
 from automation.captcha import download_captcha
-import automation.tempmail as tempmail
+import tempmail
 
 # ==================== CONFIGURATION ====================
 ADMIN_IDS = 1350376694141419581
