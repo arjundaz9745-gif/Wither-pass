@@ -60,10 +60,10 @@ class BotDataManager:
         self.config = self.load_json(
             CONFIG_FILE, {
                 "webhook_url":
-                "https://discord.com/api/webhooks/1479078904269373461/lcoK2rYkyPdN6DARypzRuJp3HDhz5LgAtq5dhiMchTr7VahEMY1fND2Os93c7gLHTi5k",
+                "",
                 "bot_enabled": True,
                 "max_concurrent_users": 100,
-                "captcha_channel_id": 1488093676604227685
+                "captcha_channel_id": 1555501819827068958
             })
 
         self.authorized_users = self.load_json(
