@@ -19,7 +19,6 @@ from datetime import datetime, timedelta
 import random
 from io import BytesIO
 from PIL import Image
-import threaWitherdingwither
 import traceback
 import time
 from typing import Optional
@@ -424,8 +423,7 @@ async def continue_after_captcha(user_id, captcha_text, interaction):
     account_info = session["account_info"]
     email = session["email"]
     password = session["password"]
-    desired_password = session.get(
-        "desired_password")  # Retrieve custom password
+    desired_password = session.get("desired_password")  # Retrieve custom password
 
     channel = bot.get_channel(session["channel_id"])
 
@@ -537,9 +535,8 @@ async def continue_after_captcha(user_id, captcha_text, interaction):
 
         print(f"✅ Password changed successfully to: {actual_password}")
 
-        # Success!
+        # ========== FIXED RESULT DICTIONARY ==========
         result = {
             "email": email,
             "old_password": password,
-            "newpass":
-        }
+            "newpass": actual
