@@ -529,7 +529,6 @@ async def continue_after_captcha(user_id, captcha_text, interaction):
     del data_manager.processing_sessions[user_id]
     data_manager.update_stats(user_id, False)
     return
-
 try:
     # previous code...
 
