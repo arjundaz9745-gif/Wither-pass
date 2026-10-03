@@ -1,9 +1,14 @@
 import sys
 import os
 
-# Force add automation folder to path
-automation_path = r'C:\Users\ewslyn\Downloads\Warden old pass Changer (1)\automation'
-sys.path.insert(0, automation_path)
+# Make automation package importable (works on Windows, Linux, Render, VPS)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+automation_path = os.path.join(BASE_DIR, "automation")
+if os.path.isdir(automation_path):
+    sys.path.insert(0, BASE_DIR)  # so "from automation.xxx" works
+else:
+    sys.path.insert(0, BASE_DIR)
+    print("⚠️ automation/ folder not found next to main.py")
 
 import discord
 from discord.ext import commands, tasks
@@ -1398,5 +1403,9 @@ async def set_webhook(interaction: discord.Interaction, url: str):
 
 # BOT SETUP
 if __name__ == "__main__":
-    bot.run("MTUyNDczODIxNTQzNTcwMjMzMw.G6CeD4.JTGxH7tbnxavRou0wJMDIodPb2rNOq8XAX2rDY")  # < Current Bot name: wither's pass changer
-#                          ^ Replace it With your Password Changer Bot Token ^
+    TOKEN = os.getenv("DISCORD_TOKEN")
+    if not TOKEN:
+        print("❌ DISCORD_TOKEN environment variable is not set!")
+        print("   On Render: go to Environment → Add DISCORD_TOKEN = your_bot_token")
+        raise SystemExit(1)
+    bot.run(TOKEN)
