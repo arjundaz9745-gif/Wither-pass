@@ -541,4 +541,4 @@ async def continue_after_captcha(user_id, captcha_text, interaction):
             "name": account_info.get("name"),
             "dob": account_info.get("dob"),
             "region": account_info.get("region"),
-       
+        }
