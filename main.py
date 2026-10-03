@@ -603,11 +603,26 @@ async def continue_after_captcha(user_id, captcha_text, interaction):
         data_manager.update_stats(user_id, False)
 
 
-# ==================== BOT EVENTS & COMMANDS ====================
-# NOTE: The original file was truncated. 
-# You still need to add your slash commands, on_ready, captcha listener, and bot.run()
-# Below is a minimal placeholder so the file at least parses.
+# ==================== FAKE WEB SERVER (for Render) ====================
+from flask import Flask
+from threading import Thread
 
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "FlareMC Password Changer Bot is online ✅", 200
+
+@app.route("/health")
+def health():
+    return "OK", 200
+
+def run_web():
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
+
+
+# ==================== BOT EVENTS & COMMANDS ====================
 @bot.event
 async def on_ready():
     print(f"✅ Logged in as {bot.user} (ID: {bot.user.id})")
@@ -624,11 +639,17 @@ async def ping(interaction: discord.Interaction):
     await interaction.response.send_message("Pong!", ephemeral=True)
 
 
-# Run the bot
-# Make sure you have DISCORD_TOKEN in environment variables on Render
+# Run both web server + Discord bot
 if __name__ == "__main__":
     token = os.getenv("DISCORD_TOKEN")
     if not token:
         print("❌ DISCORD_TOKEN environment variable is not set!")
         sys.exit(1)
+
+    # Start fake web server in background (keeps Render happy)
+    web_thread = Thread(target=run_web, daemon=True)
+    web_thread.start()
+    print(f"🌐 Fake web server started on port {os.environ.get('PORT', 10000)}")
+
+    # Start Discord bot (blocks)
     bot.run(token)
