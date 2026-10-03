@@ -530,14 +530,14 @@ async def continue_after_captcha(user_id, captcha_text, interaction):
             data_manager.update_stats(user_id, False)
             return
 
-                print("Operation completed successfully into: {actual_password}")
+                print("Operation completed successfully")
 
-        # Success!
-        result = {
-            "status": "success",
-            "name": account_info.get("name"),
-            "region": account_info.get("region"),
-        }
+# Success!
+result = {
+    "status": "success",
+    "name": account_info.get("name"),
+    "region": account_info.get("region"),
+}
 
-    except Exception as e:
-        print(f"Error: {e}")
+except Exception as e:
+    print(f"Error: {e}")
