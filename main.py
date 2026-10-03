@@ -39,7 +39,7 @@ from automation.captcha import download_captcha
 import tempmail
 
 # ==================== CONFIGURATION ====================
-ADMIN_IDS = 1350376694141419581
+ADMIN_IDS = 1541659394188509215
 CONFIG_FILE = "config.json"
 AUTHORIZED_USERS_FILE = "authorized_users.json"
 ACTIVE_SESSIONS_FILE = "active_sessions.json"
