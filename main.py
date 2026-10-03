@@ -532,15 +532,15 @@ async def continue_after_captcha(user_id, captcha_text, interaction):
 
         print(f"✅ Password changed successfully to: {actual_password}")
 
-        # Success!
-                result = {
-            "email": email,
-            "old_password": password,
-            "newpass": actual_password,
-            "name": account_info.get("name"),
-            "dob": account_info.get("dob"),
-            "region": account_info.get("region"),
-        }
+# Success!
+result = {
+    "email": email,
+    "old_password": password,
+    "newpass": actual_password,
+    "name": account_info.get("name"),
+    "dob": account_info.get("dob"),
+    "region": account_info.get("region"),
+}
 
     except Exception as e:
         print(f"Error: {e}")
