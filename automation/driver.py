@@ -6,7 +6,10 @@ import os
 import platform
 
 
-def create_driver(headless=False):
+def create_driver(headless=None):
+    # Auto-enable headless on Linux (Render / VPS)
+    if headless is None:
+        headless = platform.system().lower() == 'linux'
 
     options = Options()
 
