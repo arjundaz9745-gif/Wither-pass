@@ -1408,4 +1408,32 @@ if __name__ == "__main__":
         print("❌ DISCORD_TOKEN environment variable is not set!")
         print("   On Render: go to Environment → Add DISCORD_TOKEN = your_bot_token")
         raise SystemExit(1)
+        # ==================== KEEP ALIVE FOR RENDER WEB SERVICE ====================
+from flask import Flask
+from threading import Thread
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Wither Password Changer Bot is online ✅"
+
+def run_flask():
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
+
+def keep_alive():
+    t = Thread(target=run_flask, daemon=True)
+    t.start()
+
+# ==================== START BOT ====================
+if __name__ == "__main__":
+    TOKEN = os.getenv("DISCORD_TOKEN")
+    if not TOKEN:
+        print("❌ DISCORD_TOKEN environment variable is not set!")
+        print("   On Render: Environment → Add DISCORD_TOKEN = your_bot_token")
+        raise SystemExit(1)
+
+    keep_alive()          # ← starts the fake web server
     bot.run(TOKEN)
+    
